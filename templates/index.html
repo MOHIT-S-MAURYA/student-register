@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+        
+    <!-- form -->
+    <div class="container m-40" id="addData">
+      <h2 class="head md-3">Add Data</h2>
+
+      <form method="POST" action="/">
+        <!-- name -->
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            class="form-control md-10"
+            id="Name"
+            name="name"
+            placeholder="Enter your name"
+          />
+        </div>
+
+        <!-- college -->
+
+        <div class="mb-3">
+          <label for="college" class="form-label">College</label>
+          <input
+            type="text"
+            class="form-control md-10"
+            id="college"
+            name="college"
+            placeholder="Enter your college name"
+          />
+        </div>
+
+        <!-- email -->
+
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control md-10"
+            id="exampleInputEmail1"
+            name="email"
+            placeholder="Enter your email"
+            aria-describedby="emailHelp"
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+
+        <!-- phone number -->
+
+        <div class="mb-3">
+          <label for="phone" class="form-label">Phone Number</label>
+          <input
+            type="text"
+            class="form-control md-10"
+            id="phone"
+            name="phone"
+            placeholder="Enter your phone number"
+          />
+          <div id="phoneHelp" class="form-text">
+            We'll never share your phone number with anyone else.
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+    <!-- view data -->
+
+    <div class="container" id="viewData">
+      <h2 class="head md-3">Data available</h2>
+      <table class="table">
+        <tbody>
+          {% if form_data|length == 0 %}
+
+          <div class="alert alert-primary" role="alert">
+            No data available! Please add data above.
+          </div>
+
+          {% else %}
+
+          <thead>
+            <tr>
+              <th scope="col">Sno</th>
+              <th scope="col">Name</th>
+              <th scope="col">College</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone number</th>
+            </tr>
+          </thead>
+
+          {% endif %} {% for data in form_data %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{data.name}}</td>
+            <td>{{data.college}}</td>
+            <td>{{data.email}}</td>
+            <td>{{data.phone}}</td>
+            <td>
+              <a
+                href="/delete/{{data.sno}}"
+                type="button"
+                class="btn btn-danger"
+                >Delete</a
+              >
+            </td>
+            <td>
+              <a
+                href="/update/{{data.sno}}"
+                type="button"
+                class="btn btn-success"
+                >Update</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+
+    {% endblock body %}  
